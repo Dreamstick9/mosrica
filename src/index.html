@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'" />
+  <title>Mosrica</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="toolbar">
+    <span class="tb-label">Click to add</span>
+    <div class="segmented" id="tools">
+      <button data-tool="host" class="on">Person</button>
+      <button data-tool="deet">Repellent</button>
+      <button data-tool="erase">Erase</button>
+    </div>
+
+    <div class="tb-sep"></div>
+
+    <button data-action="toggle-play" id="btn-play">Pause</button>
+    <button data-action="reset">Restart</button>
+    <select id="speed" title="Simulation speed">
+      <option value="1">1× speed</option>
+      <option value="2">2× speed</option>
+      <option value="4">4× speed</option>
+    </select>
+
+    <div class="tb-spacer"></div>
+
+    <span class="tb-stat">Bites <b id="st-bites">0</b></span>
+    <span class="tb-stat">First bite <b id="st-first">–</b></span>
+    <span class="tb-stat">Time <b id="st-time">0:00</b></span>
+  </div>
+
+  <main>
+    <canvas id="arena"></canvas>
+
+    <aside>
+      <details open>
+        <summary>Brain</summary>
+        <p class="hint">Each circle is a neuron. Click one to switch it off.</p>
+        <canvas id="brain"></canvas>
+        <div class="row">
+          <button data-action="ko-co2">No CO₂ sense</button>
+          <button data-action="ko-heat">No heat sense</button>
+          <button data-action="ko-arousal">No arousal</button>
+          <button data-action="restore">Restore</button>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Activity <span class="summary-note">last 4 seconds</span></summary>
+        <canvas id="raster"></canvas>
+      </details>
+
+      <details open>
+        <summary>What it senses</summary>
+        <div class="meter"><label>CO₂ left</label><div><i id="m-co2L" class="red"></i></div></div>
+        <div class="meter"><label>CO₂ right</label><div><i id="m-co2R" class="red"></i></div></div>
+        <div class="meter"><label>Body heat</label><div><i id="m-heat" class="red"></i></div></div>
+        <div class="meter"><label>Lactic acid</label><div><i id="m-odor" class="red"></i></div></div>
+        <div class="meter"><label>Repellent</label><div><i id="m-deet" class="purple"></i></div></div>
+        <div class="meter"><label>Fullness</label><div><i id="m-sat" class="grey"></i></div></div>
+      </details>
+
+      <details>
+        <summary>Settings</summary>
+        <label class="slider"><span>CO₂ sensitivity</span><output id="o-co2">1.0</output>
+          <input id="p-co2" type="range" min="0" max="2" step="0.1" value="1" /></label>
+        <label class="slider"><span>Wind turbulence</span><output id="o-turb">0.4</output>
+          <input id="p-turb" type="range" min="0" max="1.5" step="0.1" value="0.4" /></label>
+        <label class="slider"><span>Neural noise</span><output id="o-noise">0.15</output>
+          <input id="p-noise" type="range" min="0" max="0.5" step="0.01" value="0.15" /></label>
+        <button data-action="clear" class="wide">Remove everyone from the room</button>
+      </details>
+    </aside>
+  </main>
+
+  <footer>
+    <i id="status-dot"></i>
+    <span id="status-text">Flying around, searching for a scent</span>
+    <span id="status-msg"></span>
+  </footer>
+
+  <script src="brain.js"></script>
+  <script src="world.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
