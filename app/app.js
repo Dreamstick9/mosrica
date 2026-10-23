@@ -5,11 +5,14 @@ import fs from "fs";
 
 let electronWindow = null;
 
-// Feature: Snapshots — window screenshots are written here
-const SNAPSHOT_DIR = path.join(import.meta.dirname, "..", "snapshots");
-
-if (!fs.existsSync(SNAPSHOT_DIR)) {
-    fs.mkdirSync(SNAPSHOT_DIR, { recursive: true });
+// Feature: Snapshots — window screenshots are written to ~/Pictures/Mosrica
+// (not next to app.js: inside a packaged .app that folder is read-only)
+function getSnapshotDir() {
+    const dir = path.join(app.getPath("pictures"), "Mosrica");
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    return dir;
 }
 
 function createWindow() {
@@ -114,7 +117,7 @@ ipcMain.handle("save-snapshot", async () => {
         }
     }
 
-    const filePath = path.join(SNAPSHOT_DIR, `mosrica-${Date.now()}.png`);
+    const filePath = path.join(getSnapshotDir(), `mosrica-${Date.now()}.png`);
     fs.writeFileSync(filePath, image.toPNG());
     return filePath;
 });
