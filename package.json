@@ -3,13 +3,38 @@
   "productName": "Mosrica",
   "version": "1.0.0",
   "description": "Spiking neural simulation of a mosquito's host-seeking brain, as a desktop app",
+  "author": "Kushagar Garg",
   "type": "module",
   "main": "app/app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "name": "Mosrica",
+        "appBundleId": "com.dreamstick9.mosrica",
+        "ignore": [
+          "^/(?!(app|src)(/|$)|package\\.json$)"
+        ]
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "name": "Mosrica",
+            "format": "ULFO"
+          }
+        }
+      ]
+    }
+  },
   "devDependencies": {
+    "@electron-forge/cli": "^8.0.1",
+    "@electron-forge/maker-dmg": "^8.0.1",
     "electron": "^45.0.0"
   }
 }

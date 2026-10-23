@@ -19,13 +19,23 @@ npm install
 npm start
 ```
 
+## Build a DMG (macOS)
+
+```bash
+npm run make
+```
+
+Uses Electron Forge with the DMG maker. The installer lands in `out/make/dmg/`.
+It isn't signed by Apple, so on another Mac open it the first time with
+right-click → **Open**.
+
 ## What you can do
 
 - **Add people / repellent**: pick Person, Repellent or Erase in the toolbar, then click the room. People breathe out CO₂ and give off heat and lactic acid. Repellent (DEET) zones push the mosquito away.
 - **Switch off neurons**: click any neuron in the brain diagram, or use the buttons under it / the Experiments menu. Remove the CO₂ neurons and the mosquito can no longer find anyone.
 - **Watch it think**: brain diagram (circles fill as neurons fire; red lines excite, purple lines inhibit) and a 4-second activity chart.
 - **Tune it**: open Settings in the sidebar for CO₂ sensitivity, wind turbulence and neural noise.
-- **File menu**: save / open scenarios (`⌘S` / `⌘O`), export a JSON run report (`⌘E`), save a PNG snapshot of the window into `snapshots/`.
+- **File menu**: save / open scenarios (`⌘S` / `⌘O`), export a JSON run report (`⌘E`), save a PNG snapshot of the window into `~/Pictures/Mosrica/`.
 
 Keys: `Space` pause · `R` restart · `1/2/3` person / repellent / erase.
 
